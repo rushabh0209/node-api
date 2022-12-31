@@ -1,7 +1,7 @@
 import { connect, set } from 'mongoose';
 import app from './app';
-import config from './config/config';
-import logger from './config/logger';
+import config from 'config/app-config';
+import logger from 'config/logger';
 
 let server: any;
 

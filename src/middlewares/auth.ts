@@ -1,7 +1,7 @@
 import passport from 'passport';
 import httpStatus from 'http-status';
-import ApiError from '../utils/ApiError';
-import { roleRights } from '../config/roles';
+import ApiError from 'utils/ApiError';
+import { roleRights } from 'config/roles';
 
 const verifyCallback =
   (req: any, resolve: any, reject: any, requiredRights: any) =>

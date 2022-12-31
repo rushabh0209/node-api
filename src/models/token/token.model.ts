@@ -1,6 +1,6 @@
 import { Schema, SchemaTypes, model } from 'mongoose';
-import { toJSON } from '../plugins';
-import { tokenTypes } from '../../config/tokens';
+import { toJSON } from 'models/plugins';
+import { tokenTypes } from 'config/tokens';
 
 const tokenSchema = new Schema(
   {

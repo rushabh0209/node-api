@@ -5,8 +5,9 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "npx tsc",
-    "start": "node ./build/index.js",
-    "dev": "nodemon"
+    "start": "node -r tsconfig-paths/register -r ts-node/register ./build/index.js",
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts",
+    "dev:dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node -r tsconfig-paths/register\" src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "passport-jwt": "^4.0.1",
     "swagger-jsdoc": "^6.2.7",
     "swagger-ui-express": "^4.6.0",
+    "tsconfig-paths": "^4.1.1",
     "validator": "^13.7.0",
     "winston": "^3.8.2"
   },
