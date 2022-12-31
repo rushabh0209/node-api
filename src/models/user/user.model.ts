@@ -1,8 +1,11 @@
+import bcrypt from 'bcryptjs';
 import { model, Schema } from 'mongoose';
 import validator from 'validator';
-import bcrypt from 'bcryptjs';
-import { toJSON, paginate } from 'models/plugins';
+
 import { roles } from 'config/roles';
+
+import { paginate, toJSON } from 'models/plugins';
+
 import { UserDocument, UserModel } from './types';
 
 const userSchema = new Schema<UserDocument, UserModel>(

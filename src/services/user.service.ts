@@ -1,5 +1,7 @@
 import httpStatus from 'http-status';
-import { User } from 'models';
+
+import User from 'models/user';
+
 import ApiError from 'utils/ApiError';
 
 /**

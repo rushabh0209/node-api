@@ -1,4 +1,5 @@
 import { Document, Model } from 'mongoose';
+
 import { Plugins } from '/models/plugins/types';
 
 export interface User {

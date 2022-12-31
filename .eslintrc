@@ -4,7 +4,7 @@
     "es6": true
   },
   "extends": ["prettier", "plugin:@typescript-eslint/recommended"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "simple-import-sort"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -14,7 +14,6 @@
     "sourceType": "module"
   },
   "rules": {
-    "indent": ["error", 2, { "SwitchCase": 1 }],
     "comma-dangle": ["error", "never"],
     "camelcase": ["warn", { "properties": "always" }],
     "object-curly-spacing": ["error", "always"],
@@ -29,6 +28,41 @@
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-this-alias": "error",
-    "quotes": ["error", "single", { "avoidEscape": true }]
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // `react` first, `next` second, then packages starting with a character
+          [ "^[a-z]"],
+          // config
+          ["^config/"],
+          // controllers
+          ["^controllers/"],
+          // docs
+          ["^docs/"],
+          // config
+          ["^config/"],
+          // middlewares
+          ["^middlewares/"],
+          // models
+          ["^models/"],
+          // routes
+          ["^routes/"],
+          // services
+          ["^services/"],
+          // utils
+          ["^utils/"],
+          // Imports starting with `./`
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          // Imports starting with `../`
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // types
+          ["^types/"],
+          // Side effect imports
+          ["^\\u0000"]
+        ]
+      }
+    ]
   }
 }

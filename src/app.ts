@@ -1,17 +1,21 @@
-import express from 'express';
-import helmet from 'helmet';
-// import xss from 'xss-clean';
-import mongoSanitize from 'express-mongo-sanitize';
 import compression from 'compression';
 import cors from 'cors';
-import passport from 'passport';
+import express from 'express';
+// import xss from 'xss-clean';
+import mongoSanitize from 'express-mongo-sanitize';
+import helmet from 'helmet';
 import httpStatus from 'http-status';
+import passport from 'passport';
+
 import config from 'config/app-config';
 import morgan from 'config/morgan';
 import { jwtStrategy } from 'config/passport';
-import { authLimiter } from 'middlewares/rateLimiter';
-import routes from 'routes/v1';
+
 import { errorConverter, errorHandler } from 'middlewares/error';
+import { authLimiter } from 'middlewares/rateLimiter';
+
+import routes from 'routes/v1';
+
 import ApiError from 'utils/ApiError';
 
 const app = express();

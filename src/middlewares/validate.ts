@@ -1,7 +1,8 @@
-import Joi from 'joi';
 import httpStatus from 'http-status';
-import pick from 'utils/pick';
+import Joi from 'joi';
+
 import ApiError from 'utils/ApiError';
+import pick from 'utils/pick';
 
 const validate = (schema: any) => (req: any, res: any, next: any) => {
   const validSchema = pick(schema, ['params', 'query', 'body']);

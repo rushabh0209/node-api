@@ -1,4 +1,5 @@
 import Joi from 'joi';
+
 import { password } from './custom.validation';
 
 export const register = {

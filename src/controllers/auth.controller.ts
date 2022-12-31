@@ -1,6 +1,7 @@
 import httpStatus from 'http-status';
+import { authService, emailService, tokenService, userService } from 'services';
+
 import catchAsync from 'utils/catchAsync';
-import { authService, userService, tokenService, emailService } from 'services';
 
 export const register = catchAsync(async (req: any, res: any) => {
   const user = await userService.createUser(req.body);

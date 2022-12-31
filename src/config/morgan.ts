@@ -1,4 +1,5 @@
 import morgan from 'morgan';
+
 import config from './app-config';
 import logger from './logger';
 

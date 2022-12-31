@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+
 import config from 'config/app-config';
 import logger from 'config/logger';
 
