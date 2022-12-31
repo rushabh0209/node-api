@@ -2,10 +2,10 @@ import jwt from 'jsonwebtoken';
 import moment from 'moment';
 import httpStatus from 'http-status';
 import config from 'config/app-config';
-import { userService } from './index';
 import { Token } from 'models';
 import ApiError from 'utils/ApiError';
 import { tokenTypes } from 'config/tokens';
+import { userService } from './index';
 
 /**
  * Generate token
@@ -20,7 +20,7 @@ const generateToken = (userId: any, expires: any, type: string, secret = config.
     sub: userId,
     iat: moment().unix(),
     exp: expires.unix(),
-    type,
+    type
   };
   return jwt.sign(payload, secret);
 };
@@ -34,19 +34,13 @@ const generateToken = (userId: any, expires: any, type: string, secret = config.
  * @param {boolean} [blacklisted]
  * @returns {Promise<Token>}
  */
-export const saveToken = async (
-  token: string,
-  userId: any,
-  expires: any,
-  type: string,
-  blacklisted = false
-) => {
+export const saveToken = async (token: string, userId: any, expires: any, type: string, blacklisted = false) => {
   const tokenDoc = await Token.create({
     token,
     user: userId,
     expires: expires.toDate(),
     type,
-    blacklisted,
+    blacklisted
   });
   return tokenDoc;
 };
@@ -59,7 +53,12 @@ export const saveToken = async (
  */
 export const verifyToken = async (token: string, type: string) => {
   const payload = jwt.verify(token, config.jwt.secret);
-  const tokenDoc = await Token.findOne({ token, type, user: payload.sub, blacklisted: false });
+  const tokenDoc = await Token.findOne({
+    token,
+    type,
+    user: payload.sub,
+    blacklisted: false
+  });
   if (!tokenDoc) {
     throw new Error('Token not found');
   }
@@ -82,12 +81,12 @@ export const generateAuthTokens = async (user: any) => {
   return {
     access: {
       token: accessToken,
-      expires: accessTokenExpires.toDate(),
+      expires: accessTokenExpires.toDate()
     },
     refresh: {
       token: refreshToken,
-      expires: refreshTokenExpires.toDate(),
-    },
+      expires: refreshTokenExpires.toDate()
+    }
   };
 };
 

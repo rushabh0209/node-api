@@ -25,7 +25,7 @@ const toJSON = (schema: any) => {
 
   schema.options.toJSON = Object.assign(schema.options.toJSON || {}, {
     transform(doc: any, ret: any, options: any) {
-      Object.keys(schema.paths).forEach((path) => {
+      Object.keys(schema.paths).forEach(path => {
         if (schema.paths[path].options && schema.paths[path].options.private) {
           deleteAtPath(ret, path.split('.'), 0);
         }
@@ -39,7 +39,7 @@ const toJSON = (schema: any) => {
       if (transform) {
         return transform(doc, ret, options);
       }
-    },
+    }
   });
 };
 

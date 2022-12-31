@@ -6,8 +6,8 @@ export const createUser = {
     email: Joi.string().required().email(),
     password: Joi.string().required().custom(password),
     name: Joi.string().required(),
-    role: Joi.string().required().valid('user', 'admin'),
-  }),
+    role: Joi.string().required().valid('user', 'admin')
+  })
 };
 
 export const getUsers = {
@@ -16,31 +16,31 @@ export const getUsers = {
     role: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
-    page: Joi.number().integer(),
-  }),
+    page: Joi.number().integer()
+  })
 };
 
 export const getUser = {
   params: Joi.object().keys({
-    userId: Joi.string().custom(objectId),
-  }),
+    userId: Joi.string().custom(objectId)
+  })
 };
 
 export const updateUser = {
   params: Joi.object().keys({
-    userId: Joi.required().custom(objectId),
+    userId: Joi.required().custom(objectId)
   }),
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
       password: Joi.string().custom(password),
-      name: Joi.string(),
+      name: Joi.string()
     })
-    .min(1),
+    .min(1)
 };
 
 export const deleteUser = {
   params: Joi.object().keys({
-    userId: Joi.string().custom(objectId),
-  }),
+    userId: Joi.string().custom(objectId)
+  })
 };

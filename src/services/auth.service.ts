@@ -1,8 +1,8 @@
 import httpStatus from 'http-status';
-import { userService, tokenService } from './index';
 import Token from 'models/token/token.model';
 import ApiError from 'utils/ApiError';
 import { tokenTypes } from 'config/tokens';
+import { userService, tokenService } from './index';
 
 /**
  * Login with username and password
@@ -27,7 +27,7 @@ export const logout = async (refreshToken: string) => {
   const refreshTokenDoc = await Token.findOne({
     token: refreshToken,
     type: tokenTypes.REFRESH,
-    blacklisted: false,
+    blacklisted: false
   });
   if (!refreshTokenDoc) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
@@ -62,10 +62,7 @@ export const refreshAuth = async (refreshToken: string) => {
  */
 export const resetPassword = async (resetPasswordToken: string, newPassword: string) => {
   try {
-    const resetPasswordTokenDoc = await tokenService.verifyToken(
-      resetPasswordToken,
-      tokenTypes.RESET_PASSWORD
-    );
+    const resetPasswordTokenDoc = await tokenService.verifyToken(resetPasswordToken, tokenTypes.RESET_PASSWORD);
     const user = await userService.getUserById(resetPasswordTokenDoc.user);
     if (!user) {
       throw new Error();
@@ -84,10 +81,7 @@ export const resetPassword = async (resetPasswordToken: string, newPassword: str
  */
 export const verifyEmail = async (verifyEmailToken: string) => {
   try {
-    const verifyEmailTokenDoc = await tokenService.verifyToken(
-      verifyEmailToken,
-      tokenTypes.VERIFY_EMAIL
-    );
+    const verifyEmailTokenDoc = await tokenService.verifyToken(verifyEmailToken, tokenTypes.VERIFY_EMAIL);
     const user = await userService.getUserById(verifyEmailTokenDoc.user);
     if (!user) {
       throw new Error();

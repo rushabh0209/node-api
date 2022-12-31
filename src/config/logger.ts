@@ -1,8 +1,8 @@
 import winston from 'winston';
 
-import config from'./app-config';
+import config from './app-config';
 
-const enumerateErrorFormat = winston.format((info) => {
+const enumerateErrorFormat = winston.format(info => {
   if (info instanceof Error) {
     Object.assign(info, { message: info.stack });
   }
@@ -19,9 +19,9 @@ const logger = winston.createLogger({
   ),
   transports: [
     new winston.transports.Console({
-      stderrLevels: ['error'],
-    }),
-  ],
+      stderrLevels: ['error']
+    })
+  ]
 });
 
 export default logger;

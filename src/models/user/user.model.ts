@@ -1,4 +1,4 @@
-import {   model, Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import { toJSON, paginate } from 'models/plugins';
@@ -10,7 +10,7 @@ const userSchema = new Schema<UserDocument, UserModel>(
     name: {
       type: String,
       required: true,
-      trim: true,
+      trim: true
     },
     email: {
       type: String,
@@ -22,7 +22,7 @@ const userSchema = new Schema<UserDocument, UserModel>(
         if (!validator.isEmail(value)) {
           throw new Error('Invalid email');
         }
-      },
+      }
     },
     password: {
       type: String,
@@ -34,20 +34,20 @@ const userSchema = new Schema<UserDocument, UserModel>(
           throw new Error('Password must contain at least one letter and one number');
         }
       },
-      private: true, // used by the toJSON plugin
+      private: true // used by the toJSON plugin
     },
     role: {
       type: String,
       enum: roles,
-      default: 'user',
+      default: 'user'
     },
     isEmailVerified: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
@@ -72,14 +72,12 @@ userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
  * @returns {Promise<boolean>}
  */
 userSchema.methods.isPasswordMatch = async function (password: any) {
-  const user = this;
-  return bcrypt.compare(password, user.password);
+  return bcrypt.compare(password, this.password);
 };
 
 userSchema.pre('save', async function (next) {
-  const user = this;
-  if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 8);
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 8);
   }
   next();
 });

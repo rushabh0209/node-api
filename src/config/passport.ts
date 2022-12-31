@@ -1,11 +1,11 @@
 import { Strategy as JwtStrategy, ExtractJwt, VerifiedCallback } from 'passport-jwt';
+import { User } from 'models';
 import config from './app-config';
 import { tokenTypes } from './tokens';
-import { User } from 'models';
 
 const jwtOptions = {
   secretOrKey: config.jwt.secret,
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 };
 
 const jwtVerify = async (payload: any, done: VerifiedCallback) => {
