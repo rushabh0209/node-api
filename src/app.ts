@@ -1,7 +1,6 @@
 import compression from 'compression';
 import cors from 'cors';
-import express from 'express';
-// import xss from 'xss-clean';
+import express, { json, urlencoded } from 'express';
 import mongoSanitize from 'express-mongo-sanitize';
 import helmet from 'helmet';
 import httpStatus from 'http-status';
@@ -29,13 +28,12 @@ if (config.env !== 'test') {
 app.use(helmet());
 
 // parse json request body
-app.use(express.json());
+app.use(json());
 
 // parse urlencoded request body
-app.use(express.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
 
 // sanitize request data
-// app.use(xss());
 app.use(mongoSanitize());
 
 // gzip compression

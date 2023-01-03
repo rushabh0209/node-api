@@ -7,6 +7,13 @@ export const objectId = (value: any, helpers: CustomHelpers) => {
   return value;
 };
 
+export const phoneNumber = (value: any, helpers: CustomHelpers) => {
+  if (!value.match(/^[0-9]{10}$/)) {
+    return helpers.message({ custom: 'Invalid phone number' });
+  }
+  return value;
+};
+
 export const password = (value: any, helpers: CustomHelpers) => {
   if (value.length < 8) {
     return helpers.message({ custom: 'password must be at least 8 characters' });

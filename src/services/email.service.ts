@@ -5,7 +5,7 @@ import logger from 'config/logger';
 
 const transport = nodemailer.createTransport(config.email.smtp);
 /* istanbul ignore next */
-if (config.env !== 'test') {
+if (config.env !== 'test' && config.env !== 'development') {
   transport
     .verify()
     .then(() => logger.info('Connected to email server'))

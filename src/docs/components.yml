@@ -10,14 +10,30 @@ components:
           format: email
         name:
           type: string
+        phoneNumber:
+          type: string
+        referenceCode:
+          type: string
+        referralCode:
+          type: string
+        image:
+          type: string
         role:
           type: string
           enum: [user, admin]
+        gender:
+          type: string
+          enum: [male, female]
       example:
         id: 5ebac534954b54139806c112
         email: fake@example.com
+        phoneNumber: "7896541252"
         name: fake name
         role: user
+        referralCode: U12345678
+        referenceCode: U12345678
+        image: imageURL
+        gender: male
 
     Token:
       type: object
@@ -47,16 +63,34 @@ components:
         message:
           type: string
 
+    DuplicateEmailORPhoneNumberError:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+          enum: [Email already taken, Phone number already taken]
+
   responses:
-    DuplicateEmail:
-      description: Email already taken
+    DuplicateEmailORPhoneNumber:
+      description: Email / Phone number already taken
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DuplicateEmailORPhoneNumberError'
+          example:
+            code: 400
+            message: Email already taken
+    ReferralCodeNotFound:
+      description: Referral code not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
           example:
-            code: 400
-            message: Email already taken
+            code: 404
+            message: Referral code not found
     Unauthorized:
       description: Unauthorized
       content:

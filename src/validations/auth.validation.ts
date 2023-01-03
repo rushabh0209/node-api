@@ -1,18 +1,20 @@
 import Joi from 'joi';
 
-import { password } from './custom.validation';
+import { password, phoneNumber } from './custom.validation';
 
 export const register = {
   body: Joi.object().keys({
     email: Joi.string().required().email(),
+    phoneNumber: Joi.string().required().custom(phoneNumber),
     password: Joi.string().required().custom(password),
-    name: Joi.string().required()
+    name: Joi.string().required(),
+    referralCode: Joi.string()
   })
 };
 
 export const login = {
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    phoneNumber: Joi.string().required().custom(phoneNumber),
     password: Joi.string().required()
   })
 };

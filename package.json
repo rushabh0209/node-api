@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node -r tsconfig-paths/register -r ts-node/register ./build/index.js",
-    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node -r tsconfig-paths/register\" src/index.ts",
+    "dev": "nodemon --watch \"src/**/*\" -e ts,yml --exec \"ts-node -r tsconfig-paths/register\" src/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check **/*.ts",
